@@ -1,4 +1,4 @@
-# Run from this directory: cd peer_connect && make run
+# Run from this directory: cd matchPeople && make run
 VENV ?= venv
 PYTHON := $(VENV)/bin/python
 PIP := $(VENV)/bin/pip

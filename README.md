@@ -1,4 +1,4 @@
-# KinLink (peer_connect)
+# KinLink ([matchPeople](https://github.com/ShamirBahome/matchPeople))
 
 Hackathon / student MVP: match people for **peer support** (lived experience topics + optional admin verification) and **social discovery** (languages, hobbies, age, gender, optional distance).
 
@@ -7,7 +7,8 @@ Hackathon / student MVP: match people for **peer support** (lived experience top
 ## Quick start
 
 ```bash
-cd peer_connect
+git clone https://github.com/ShamirBahome/matchPeople.git
+cd matchPeople
 cp .env.example .env
 make install
 make run
@@ -24,15 +25,11 @@ With `ALLOW_SEED=1` in `.env`, visit **http://127.0.0.1:5050/dev/seed** once.
 
 ## GitHub
 
-Create an empty repo, then:
+Remote: [https://github.com/ShamirBahome/matchPeople.git](https://github.com/ShamirBahome/matchPeople.git)
 
 ```bash
-cd peer_connect
-git init
-git add .
-git commit -m "Initial KinLink MVP"
-git branch -M main
-git remote add origin https://github.com/YOUR_USER/YOUR_REPO.git
+cd matchPeople
+git remote -v
 git push -u origin main
 ```
 
