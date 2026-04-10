@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Sign in — KinLink{% endblock %}
+{% block content %}
+<div class="max-w-md mx-auto">
+    <h1 class="text-2xl font-bold text-white mb-6">Sign in</h1>
+    <form method="post" class="space-y-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6">
+        <div>
+            <label class="block text-sm text-slate-400 mb-1">Email</label>
+            <input type="email" name="email" required class="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white">
+        </div>
+        <div>
+            <label class="block text-sm text-slate-400 mb-1">Password</label>
+            <input type="password" name="password" required class="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white">
+        </div>
+        <button type="submit" class="w-full py-2.5 rounded-lg bg-teal-600 text-white font-semibold hover:bg-teal-500">Sign in</button>
+    </form>
+    <p class="text-center text-slate-500 text-sm mt-4">New here? <a href="{{ url_for('register') }}" class="text-teal-400">Create account</a></p>
+</div>
+{% endblock %}

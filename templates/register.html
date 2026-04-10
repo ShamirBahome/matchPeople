@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Join — KinLink{% endblock %}
+{% block content %}
+<div class="max-w-md mx-auto">
+    <h1 class="text-2xl font-bold text-white mb-2">Create account</h1>
+    <p class="text-slate-400 text-sm mb-6">You can refine goals in your profile next.</p>
+    <form method="post" class="space-y-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6">
+        <div>
+            <label class="block text-sm text-slate-400 mb-1">Display name</label>
+            <input name="display_name" required class="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white">
+        </div>
+        <div>
+            <label class="block text-sm text-slate-400 mb-1">Email</label>
+            <input type="email" name="email" required class="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white">
+        </div>
+        <div>
+            <label class="block text-sm text-slate-400 mb-1">Password</label>
+            <input type="password" name="password" required minlength="6" class="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white">
+        </div>
+        <div class="space-y-2 text-sm text-slate-300">
+            <label class="flex gap-2 items-center"><input type="checkbox" name="open_to_social" checked class="rounded border-slate-600"> Open to meeting new friends</label>
+            <label class="flex gap-2 items-center"><input type="checkbox" name="open_to_support_others" class="rounded border-slate-600"> I may offer peer support (lived experience)</label>
+            <label class="flex gap-2 items-center"><input type="checkbox" name="seeking_peer_support" class="rounded border-slate-600"> I’m looking for peer support</label>
+        </div>
+        <button type="submit" class="w-full py-2.5 rounded-lg bg-teal-600 text-white font-semibold hover:bg-teal-500">Sign up</button>
+    </form>
+    <p class="text-center text-slate-500 text-sm mt-4">Already have an account? <a href="{{ url_for('login') }}" class="text-teal-400">Sign in</a></p>
+</div>
+{% endblock %}

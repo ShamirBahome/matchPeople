@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Inbox — KinLink{% endblock %}
+{% block content %}
+<div class="space-y-10 max-w-3xl mx-auto">
+    <div>
+        <h1 class="text-3xl font-bold text-white mb-2">Inbox</h1>
+        <p class="text-slate-400 text-sm">Connection requests — this MVP does not include chat; exchange contact details safely if you accept.</p>
+    </div>
+    <section>
+        <h2 class="text-lg font-semibold text-white mb-4">Incoming</h2>
+        <div class="space-y-3">
+            {% for r in incoming %}
+            <div class="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
+                <div class="flex justify-between gap-2 flex-wrap">
+                    <span class="text-white font-medium">{{ r.from_user.profile.display_name }}</span>
+                    <span class="text-xs text-slate-500">{{ r.kind }} · {{ r.status }}</span>
+                </div>
+                <p class="text-slate-400 text-sm mt-2">{{ r.message or '(no message)' }}</p>
+                {% if r.status == 'pending' %}
+                <form method="post" action="{{ url_for('inbox_action', req_id=r.id) }}" class="flex gap-2 mt-3">
+                    <button name="action" value="accept" class="text-xs px-3 py-1.5 rounded-lg bg-teal-700 text-white">Accept</button>
+                    <button name="action" value="decline" class="text-xs px-3 py-1.5 rounded-lg border border-slate-600 text-slate-300">Decline</button>
+                </form>
+                {% endif %}
+            </div>
+            {% else %}
+            <p class="text-slate-500 text-sm">No incoming requests.</p>
+            {% endfor %}
+        </div>
+    </section>
+    <section>
+        <h2 class="text-lg font-semibold text-white mb-4">Sent</h2>
+        <div class="space-y-3">
+            {% for r in outgoing %}
+            <div class="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
+                <div class="flex justify-between gap-2">
+                    <span class="text-slate-300">To {{ r.to_user.profile.display_name }}</span>
+                    <span class="text-xs text-slate-500">{{ r.kind }} · {{ r.status }}</span>
+                </div>
+                <p class="text-slate-500 text-sm mt-1">{{ r.message or '' }}</p>
+            </div>
+            {% else %}
+            <p class="text-slate-500 text-sm">You haven’t sent any requests.</p>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}

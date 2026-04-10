@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}Edit profile — KinLink{% endblock %}
+{% block content %}
+<div class="max-w-2xl mx-auto">
+    <h1 class="text-2xl font-bold text-white mb-6">Edit profile</h1>
+    <form method="post" class="space-y-6 rounded-2xl border border-slate-800 bg-slate-900/40 p-6">
+        <div class="grid md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm text-slate-400 mb-1">Display name</label>
+                <input name="display_name" value="{{ profile.display_name }}" required class="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white">
+            </div>
+            <div>
+                <label class="block text-sm text-slate-400 mb-1">Age</label>
+                <input name="age" type="number" min="13" max="120" value="{{ profile.age or '' }}" class="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white">
+            </div>
+            <div>
+                <label class="block text-sm text-slate-400 mb-1">Gender</label>
+                <select name="gender" class="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white">
+                    <option value="">Prefer not to say</option>
+                    <option value="Female" {% if profile.gender == 'Female' %}selected{% endif %}>Female</option>
+                    <option value="Male" {% if profile.gender == 'Male' %}selected{% endif %}>Male</option>
+                    <option value="Non-binary" {% if profile.gender == 'Non-binary' %}selected{% endif %}>Non-binary</option>
+                    <option value="Other" {% if profile.gender == 'Other' %}selected{% endif %}>Other</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm text-slate-400 mb-1">City</label>
+                <input name="city" value="{{ profile.city or '' }}" class="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white" placeholder="Toronto">
+            </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm text-slate-400 mb-1">Latitude (optional, for distance)</label>
+                <input name="latitude" value="{{ profile.latitude or '' }}" class="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white" placeholder="43.6532">
+            </div>
+            <div>
+                <label class="block text-sm text-slate-400 mb-1">Longitude (optional)</label>
+                <input name="longitude" value="{{ profile.longitude or '' }}" class="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white" placeholder="-79.3832">
+            </div>
+        </div>
+        <div>
+            <label class="block text-sm text-slate-400 mb-1">Languages (comma-separated)</label>
+            <input name="languages" value="{{ profile.languages or 'English' }}" class="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white">
+        </div>
+        <div>
+            <label class="block text-sm text-slate-400 mb-1">Hobbies (comma-separated)</label>
+            <input name="hobbies" value="{{ profile.hobbies or '' }}" class="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white" placeholder="Hiking, Music, Cooking">
+        </div>
+        <div>
+            <label class="block text-sm text-slate-400 mb-1">What you’re looking for support with (optional)</label>
+            <textarea name="seeking_help_with" rows="3" class="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white" placeholder="Short note — e.g. grief after losing my partner">{{ profile.seeking_help_with or '' }}</textarea>
+        </div>
+        <div>
+            <label class="block text-sm text-slate-400 mb-1">Bio</label>
+            <textarea name="bio" rows="4" class="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white">{{ profile.bio or '' }}</textarea>
+        </div>
+        <div class="space-y-2 text-sm text-slate-300 border-t border-slate-800 pt-4">
+            <p class="text-slate-400 text-xs mb-2">Goals on the platform</p>
+            <label class="flex gap-2 items-center"><input type="checkbox" name="open_to_social" {% if profile.open_to_social %}checked{% endif %} class="rounded border-slate-600"> Open to social discovery</label>
+            <label class="flex gap-2 items-center"><input type="checkbox" name="open_to_support_others" {% if profile.open_to_support_others %}checked{% endif %} class="rounded border-slate-600"> I can offer peer support (lived experience)</label>
+            <label class="flex gap-2 items-center"><input type="checkbox" name="seeking_peer_support" {% if profile.seeking_peer_support %}checked{% endif %} class="rounded border-slate-600"> I’m seeking peer support</label>
+        </div>
+        <div class="border-t border-slate-800 pt-4">
+            <p class="text-slate-400 text-sm mb-3">Mark lived experiences you can speak to (admins verify before showing as verified).</p>
+            <div class="space-y-2 max-h-48 overflow-y-auto">
+                {% for tag in tags %}
+                <label class="flex gap-2 items-start text-sm text-slate-300">
+                    <input type="checkbox" name="exp_{{ tag.slug }}" {% if tag.slug in selected_slugs %}checked{% endif %} class="mt-1 rounded border-slate-600">
+                    <span><strong class="text-white">{{ tag.label }}</strong> — <span class="text-slate-500">{{ tag.description }}</span></span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+        <button type="submit" class="w-full py-2.5 rounded-lg bg-teal-600 text-white font-semibold hover:bg-teal-500">Save profile</button>
+    </form>
+</div>
+{% endblock %}

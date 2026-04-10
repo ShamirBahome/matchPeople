@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Admin — KinLink{% endblock %}
+{% block content %}
+<div class="max-w-3xl mx-auto space-y-6">
+    <h1 class="text-3xl font-bold text-white">Verify lived experience</h1>
+    <p class="text-slate-400 text-sm">After you interview or onboard someone in real life, mark their topic as verified here.</p>
+    {% if pending %}
+    <ul class="space-y-3">
+        {% for s in pending %}
+        <li class="rounded-xl border border-slate-800 bg-slate-900/40 p-4 flex flex-wrap justify-between gap-3 items-center">
+            <div>
+                <p class="text-white font-medium">{{ s.user.profile.display_name }} <span class="text-slate-500 font-normal">&lt;{{ s.user.email }}&gt;</span></p>
+                <p class="text-teal-400 text-sm">{{ s.tag.label }}</p>
+            </div>
+            <form method="post" action="{{ url_for('admin_verify', sid=s.id) }}">
+                <button type="submit" class="px-4 py-2 rounded-lg bg-violet-600 text-white text-sm">Verify</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-slate-500">No pending experience claims.</p>
+    {% endif %}
+</div>
+{% endblock %}
