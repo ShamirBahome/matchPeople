@@ -1,18 +1,6 @@
-# KinLink ([matchPeople](https://github.com/ShamirBahome/matchPeople))
-
-Hackathon / student MVP: match people for **peer support** (lived experience topics + optional admin verification) and **social discovery** (languages, hobbies, age, gender, optional distance).
+Student MVP: match people for **peer support** (lived experience topics + optional admin verification) and **social discovery** (languages, hobbies, age, gender, optional distance).
 
 **Not** therapy, emergency care, or a production-ready safety stack. See `templates/crisis.html` for crisis lines.
-
-## Quick start
-
-```bash
-git clone https://github.com/ShamirBahome/matchPeople.git
-cd matchPeople
-cp .env.example .env
-make install
-make run
-```
 
 Open http://127.0.0.1:5050
 
